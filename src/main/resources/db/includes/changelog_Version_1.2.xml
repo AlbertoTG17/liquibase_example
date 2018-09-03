@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+	<changeSet author="atostado" id="merge_clomuns_usuarios">
+		<comment>Se mergean dos columas de la tabla usuarios</comment>
+		<mergeColumns column1Name="name" column2Name="lastname"
+			finalColumnName="fullname" finalColumnType="varchar(255)"
+			joinString="" tableName="usuarios" />
+			
+		<rollback>
+			<addColumn tableName="usuarios">
+				<column name="name" type="varchar(100)"/>
+				<column name="lastname" type="varchar(100)"/>
+			</addColumn>
+			<dropColumn tableName="usuarios" columnName="fullname"/>
+		</rollback>
+	</changeSet>
+
+	<changeSet author="atostado" id="--Version_1.2--">
+		<tagDatabase tag="Version_1.2" />
+	</changeSet>
+	
+	
+</databaseChangeLog> 

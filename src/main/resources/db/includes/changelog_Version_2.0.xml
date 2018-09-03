@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+                      
+	<changeSet author="atostado" id="create_table_example">
+		<comment>Se crea la tabla example</comment>
+		<createTable tableName="example">
+			<column name="COLUMN1" type="TEXT" />
+			<column name="COLUMN2" type="TEXT" />
+		</createTable>
+	</changeSet>
+	
+	<changeSet author="atostado" id="--Version_2.0--">
+		<tagDatabase tag="Version_2.0"/>
+	</changeSet>
+
+</databaseChangeLog>

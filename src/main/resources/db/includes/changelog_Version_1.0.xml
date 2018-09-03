@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+                      
+	<changeSet author="atostado" id="create_table_usuarios">
+		<comment>Se crea tabla usuarios</comment>
+		<createTable remarks="Used to store user's information"
+			tableName="usuarios">
+			<column name="id" type="int">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="email" type="varchar(100)" />
+			<column name="phone" type="int" />
+			<column name="address" type="int">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+	
+	<changeSet author="atostado" id="insert_data_usuarios">
+		<comment>Insercion de datos en Usuarios</comment>
+		<insert tableName="usuarios">
+			<column name="id" valueNumeric="1" />
+			<column name="name" value="Bart" />
+			<column name="email" value="contact@jeejava.com" />
+			<column name="phone" valueNumeric="1234567890" />
+			<column name="address" valueNumeric="1" />
+		</insert>
+		<insert tableName="usuarios">
+			<column name="id" valueNumeric="2" />
+			<column name="name" value="krusty" />
+			<column name="email" value="contact@jeejava.com" />
+			<column name="phone" valueNumeric="1234567891" />
+			<column name="address" valueNumeric="2" />
+		</insert>
+	</changeSet>
+	
+	<changeSet author="atostado" id="--Version_1.0--">
+		<tagDatabase tag="Version_1.0"/>
+	</changeSet>
+	
+</databaseChangeLog> 

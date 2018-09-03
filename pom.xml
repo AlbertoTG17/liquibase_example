@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>samples</groupId>
+	<artifactId>Ejemplo_Liquibase</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Ejemplo_Liquibase</name>
+	<description>Use Spring Data JPA + Hibernate + MySQL in Spring Boot + Liquibase</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.0.RELEASE</version>
+		<relativePath />
+	</parent>
+
+	<dependencies>
+		<!-- SPRING -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- MYSQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<!-- LIQUIBASE -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		<!-- 		GENERADOR YAML -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<start-class>netgloo.Application</start-class>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.4.1</version>
+				<dependencies>
+<!-- 				LIBRERIAS PARA GENERAR ENTITIES -->
+					<dependency>
+						<groupId>org.liquibase.ext</groupId>
+						<artifactId>liquibase-hibernate4</artifactId>
+						<version>3.5</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+						<version>4.1.7.RELEASE</version>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework.data</groupId>
+						<artifactId>spring-data-jpa</artifactId>
+						<version>1.7.3.RELEASE</version>
+					</dependency>
+					<!-- GENERADOR YAML -->
+					<dependency>
+						<groupId>org.yaml</groupId>
+						<artifactId>snakeyaml</artifactId>
+						<version>1.17</version>
+					</dependency>
+				</dependencies>
+
+				<configuration>
+					<propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
+					<outputFileEncoding>UTF-8</outputFileEncoding>
+					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+					<migrationSqlOutputFile>src/main/resources/db/generated/dryrun.sql</migrationSqlOutputFile>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>****Comparacion de entities classpath-bd y Update en la bd auxiliar****</id>
+						<phase>test</phase>
+						<configuration>
+							<propertyFile>src/main/resources/db/liquibase_diff.properties</propertyFile>
+						</configuration>
+						<goals>
+							<goal>diff</goal>
+							<goal>update</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>****Update en la bd principal****</id>
+						<phase>test</phase>
+						<goals>
+							<goal>update</goal>
+							<goal>status</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
