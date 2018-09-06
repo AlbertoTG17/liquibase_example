@@ -39,8 +39,14 @@
 			<column name="phone" valueNumeric="1234567891" />
 			<column name="address" valueNumeric="2" />
 		</insert>
+		
+		<rollback>
+			<delete tableName="usuarios">			
+				<where>id=1 and id=2</where>	
+			</delete>
+		</rollback>
 	</changeSet>
-	
+		
 	<changeSet author="atostado" id="--Version_1.0--">
 		<tagDatabase tag="Version_1.0"/>
 	</changeSet>

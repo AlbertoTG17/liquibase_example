@@ -1,5 +1,6 @@
 package sample.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ public class Cabessa {
 	private String email;
 
 	@NotNull
-	private String name;
+	private String nameee;
 
 //	@NotNull
 //	private boolean esCabeson;
@@ -28,10 +29,10 @@ public class Cabessa {
 	}
 
 	public Cabessa(long id, @NotNull String email, @NotNull String name, @NotNull boolean esCabeson) {
-		super();
+		//super();
 		this.id = id;
 		this.email = email;
-		this.name = name;
+		this.nameee = name;
 //		this.esCabeson = esCabeson;
 	}
 
@@ -53,11 +54,11 @@ public class Cabessa {
 	}
 
 	public String getName() {
-		return name;
+		return nameee;
 	}
 
 	public void setName(String value) {
-		this.name = value;
+		this.nameee = value;
 	}
 
 //	public boolean isEsCabeson() {

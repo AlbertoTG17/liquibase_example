@@ -1,5 +1,6 @@
 package sample.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,11 +10,12 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "clientes")
+public class Cliente {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  //@GeneratedValue(strategy = GenerationType.AUTO)
+  //@Column(nullable = false)
   private long id;
   
   @NotNull
@@ -23,13 +25,13 @@ public class User {
   private String name;
   
   
-  public User() { }
+  public Cliente() { }
 
-  public User(long id) { 
+  public Cliente(long id) { 
     this.id = id;
   }
   
-  public User(String email, String name) {
+  public Cliente(String email, String name) {
     this.email = email;
     this.name = name;
   }

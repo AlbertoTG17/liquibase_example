@@ -84,9 +84,9 @@
 					<dependency>
 						<groupId>org.yaml</groupId>
 						<artifactId>snakeyaml</artifactId>
-						<version>1.17</version>
+						<version>1.12</version>
 					</dependency>
-				</dependencies>
+				</dependencies> 
 
 				<configuration>
 					<propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
@@ -96,6 +96,24 @@
 				</configuration>
 
 				<executions>
+					<execution>
+						<id>****Clean en bd liquibase_spring*****</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>dropAll</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>****Clean en bd liquibase_entity*****</id>
+						<phase>clean</phase>
+						<configuration>
+							<propertyFile>src/main/resources/db/liquibase_diff.properties</propertyFile>
+						</configuration>
+						<goals>
+							<goal>dropAll</goal>
+						</goals> 
+					</execution>
+					
 					<execution>
 						<id>****Comparacion de entities classpath-bd y Update en la bd auxiliar****</id>
 						<phase>test</phase>

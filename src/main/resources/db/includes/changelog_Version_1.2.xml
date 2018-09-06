@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-	<changeSet author="atostado" id="merge_clomuns_usuarios">
+	<changeSet author="atostado" id="merge_clomuns_usuarios" dbms="mysql">
 		<comment>Se mergean dos columas de la tabla usuarios</comment>
 		<mergeColumns column1Name="name" column2Name="lastname"
 			finalColumnName="fullname" finalColumnType="varchar(255)"
@@ -23,6 +23,5 @@
 	<changeSet author="atostado" id="--Version_1.2--">
 		<tagDatabase tag="Version_1.2" />
 	</changeSet>
-	
 	
 </databaseChangeLog> 

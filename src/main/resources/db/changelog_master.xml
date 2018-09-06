@@ -6,7 +6,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 	<!-- 	Si no cumple al menos una de las dos la ejecucion se detiene de inmediato -->
-	<preConditions onFail="HALT">	
+	<preConditions onFail="HALT" onFailMessage="Callaos, y bailad">	
 		<or>
 			<dbms type="mysql"/>
 			<runningAs username="rootl"/>			
@@ -14,7 +14,7 @@
 	</preConditions>
 	
 	<!-- BEANS JPA --> 
-	<include file="src/main/resources/db/generated/changelog_diff.xml" />
+	<include file="src/main/resources/db/generated/changelog_diff.xml"/>
 	
 	<!-- 	Version 1.0 -->
 	<include file="src/main/resources/db/includes/changelog_Version_1.0.xml"/>
