@@ -4,6 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+                
                       
 	<changeSet author="atostado" id="create_table_usuarios">
 		<comment>Se crea tabla usuarios</comment>
@@ -47,8 +48,5 @@
 		</rollback>
 	</changeSet>
 		
-	<changeSet author="atostado" id="--Version_1.0--">
-		<tagDatabase tag="Version_1.0"/>
-	</changeSet>
 	
 </databaseChangeLog> 
