@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.2.RELEASE</version>
+	</parent>
+	<groupId>com.example</groupId>
+	<artifactId>LiquibaseExample</artifactId>
+	<version>0.0.3-SNAPSHOT</version>
+	<name>LiquibaseExample</name>
+	<description>Demo project for Liquibase</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<liquibase-maven-plugin-version>3.6.2</liquibase-maven-plugin-version>
+		<liquibase-core-version>3.6.2</liquibase-core-version>
+		<spring-liquibase-enabled>false</spring-liquibase-enabled>
+		<liquibase-hibernate4-version>3.6</liquibase-hibernate4-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<!-- Liquibase -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>3.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!-- Clean of diffs files -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>****CLEAN OF DIFF AND GENERATED FILES****</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+						<configuration>
+							<excludeDefaultDirectories>true</excludeDefaultDirectories>
+							<filesets>
+								<fileset>
+									<directory>src/main/resources/db/generated</directory>
+									<includes>
+										<include>*.yml</include>
+									</includes>
+								</fileset>
+							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Liquibase -->
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>3.6.2</version>
+				<configuration>
+					<!-- <url>jdbc:h2:file:./target/liquibase_test;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE</url> -->
+					<url>jdbc:mysql://172.26.0.2:3306/liquibase_spring?useSSL=false</url>
+					<username>root</username>
+					<password>toor</password>
+					<changeLogFile>src/main/resources/db/master.yml</changeLogFile>
+					<driver>com.mysql.cj.jdbc.Driver</driver>
+					<tag>${project.version}</tag>
+					<rollbackTag>${project.version}</rollbackTag>
+					<referenceUrl>hibernate:spring:com.example.model?dialect=org.hibernate.dialect.MySQLDialect</referenceUrl>
+
+					<!-- <propertyFile>src/main/resources/config/application.yml</propertyFile> -->
+					<diffChangeLogFile>src/main/resources/db/generated/${project.artifactId}-${project.version}-JIRAHERE.yml</diffChangeLogFile>
+					<outputChangeLogFile>src/main/resources/db/generated/${project.artifactId}-${project.version}-JIRAHERE.yml</outputChangeLogFile>
+
+					<outputFileEncoding>UTF-8</outputFileEncoding>
+					<verbose>false</verbose>
+					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+				</configuration>
+				<!-- <executions> -->
+				<!-- <execution> -->
+				<!-- <id>****PREPARE TEST CONTEXT****</id> -->
+				<!-- <phase>process-classes</phase> -->
+				<!-- <goals> -->
+				<!-- <goal>dropAll</goal> -->
+				<!-- <goal>tag</goal> -->
+				<!-- <goal>update</goal> -->
+				<!-- <goal>rollback</goal> -->
+				<!-- </goals> -->
+				<!-- <configuration> -->
+				<!-- <url>jdbc:h2:file:./target/liquibase_test;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE</url> -->
+				<!-- <username>admin</username> -->
+				<!-- <password>admin</password> -->
+				<!-- <driver>org.h2.Driver</driver> -->
+				<!-- </configuration> -->
+				<!-- </execution> -->
+				<!-- </executions> -->
+				<dependencies>
+					<dependency>
+						<groupId>org.liquibase.ext</groupId>
+						<artifactId>liquibase-hibernate4</artifactId>
+						<version>3.6</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-beans</artifactId>
+						<version>5.1.0.RELEASE</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-core</artifactId>
+						<version>5.1.0.RELEASE</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-context</artifactId>
+						<version>5.1.0.RELEASE</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring-orm</artifactId>
+						<version>5.1.0.RELEASE</version>
+						<scope>compile</scope>
+					</dependency>
+					<dependency>
+						<groupId>org.yaml</groupId>
+						<artifactId>snakeyaml</artifactId>
+						<version>1.19</version>
+						<scope>compile</scope>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.liquibase</groupId>
+										<artifactId>
+											liquibase-maven-plugin
+										</artifactId>
+										<versionRange>
+											[3.6.2,)
+										</versionRange>
+										<goals>
+											<goal>dropAll</goal>
+											<goal>rollback</goal>
+											<goal>update</goal>
+											<goal>tag</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

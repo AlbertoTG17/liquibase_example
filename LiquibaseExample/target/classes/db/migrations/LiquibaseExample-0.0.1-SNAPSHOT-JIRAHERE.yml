@@ -1,0 +1,186 @@
+databaseChangeLog:
+- changeSet:
+    id: 1547465197440-1
+    author: atostado (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: AccountReferencePK
+            name: id
+            type: INT
+        - column:
+            name: currency
+            type: VARCHAR(255)
+        - column:
+            name: iban
+            type: VARCHAR(255)
+        tableName: AccountReference
+- changeSet:
+    id: 1547465197440-2
+    author: atostado (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: AdressPK
+            name: id
+            type: INT
+        - column:
+            name: buildingNumber
+            type: VARCHAR(255)
+        - column:
+            name: city
+            type: VARCHAR(255)
+        - column:
+            name: countryCode
+            type: VARCHAR(255)
+        - column:
+            name: postalCode
+            type: VARCHAR(255)
+        - column:
+            name: street
+            type: VARCHAR(255)
+        tableName: Adress
+- changeSet:
+    id: 1547465197440-3
+    author: atostado (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+              primaryKeyName: AmountPK
+            name: id
+            type: INT
+        - column:
+            name: amount
+            type: DECIMAL(19, 2)
+        - column:
+            name: currency
+            type: VARCHAR(255)
+        tableName: Amount
+- changeSet:
+    id: 1547465197440-4
+    author: atostado (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              primaryKey: true
+              primaryKeyName: PaymentsPK
+            name: paymentId
+            type: VARCHAR(255)
+        - column:
+            name: creditorAgent
+            type: VARCHAR(255)
+        - column:
+            name: creditorName
+            type: VARCHAR(255)
+        - column:
+            name: endToEndIdentification
+            type: VARCHAR(255)
+        - column:
+            name: remittanceInformationUnstructured
+            type: VARCHAR(255)
+        - column:
+            name: requestedExecutionDate
+            type: datetime
+        - column:
+            name: scaOauth
+            type: VARCHAR(255)
+        - column:
+            name: transactionFeeIndicator
+            type: BIT
+        - column:
+            name: transactionStatus
+            type: VARCHAR(255)
+        - column:
+            name: creditorAccount_id
+            type: INT
+        - column:
+            name: creditorAddress_id
+            type: INT
+        - column:
+            name: debtorAccount_id
+            type: INT
+        - column:
+            name: instructedAmount_id
+            type: INT
+        - column:
+            name: transactionFees_id
+            type: INT
+        tableName: Payments
+- changeSet:
+    id: 1547465197440-5
+    author: atostado (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: creditorAccount_id
+        baseTableName: Payments
+        constraintName: FK_b1rkgkn5bpd72h6masd9abq1g
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: AccountReference
+        validate: true
+- changeSet:
+    id: 1547465197440-6
+    author: atostado (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: debtorAccount_id
+        baseTableName: Payments
+        constraintName: FK_lr7to1sr4nq3jachsvfher775
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: AccountReference
+        validate: true
+- changeSet:
+    id: 1547465197440-7
+    author: atostado (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: instructedAmount_id
+        baseTableName: Payments
+        constraintName: FK_m5epn8k3f96pgcgpluv8yxbx2
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Amount
+        validate: true
+- changeSet:
+    id: 1547465197440-8
+    author: atostado (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: transactionFees_id
+        baseTableName: Payments
+        constraintName: FK_np7qh9ebumx510j019nhlffh9
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Amount
+        validate: true
+- changeSet:
+    id: 1547465197440-9
+    author: atostado (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: creditorAddress_id
+        baseTableName: Payments
+        constraintName: FK_sn2x3a895sosld7wrygm78bpb
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: Adress
+        validate: true
+

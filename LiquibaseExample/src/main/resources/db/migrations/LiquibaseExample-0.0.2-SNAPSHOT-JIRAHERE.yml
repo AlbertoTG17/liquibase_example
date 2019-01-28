@@ -1,0 +1,11 @@
+databaseChangeLog:
+- changeSet:
+    id: 1547635711907-6
+    author: atostado (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: street22
+            type: varchar(255)
+        tableName: Payments

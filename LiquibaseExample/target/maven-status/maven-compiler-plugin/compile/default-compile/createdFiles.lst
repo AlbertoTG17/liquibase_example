@@ -1,0 +1,5 @@
+com/example/model/PaymentEntity.class
+com/example/model/AccountReferenceEntity.class
+com/example/model/AmountEntity.class
+com/example/LiquibaseExample/LiquibaseExampleApplication.class
+com/example/model/AdressEntity.class

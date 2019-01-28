@@ -1,0 +1,10 @@
+databaseChangeLog:
+- changeSet:
+    id: 123431253424-5
+    author: alopez
+    changes:
+    - renameColumn: 
+        columnDataType: varchar(255)
+        newColumnName: street2
+        oldColumnName: street22
+        tableName: Payments
